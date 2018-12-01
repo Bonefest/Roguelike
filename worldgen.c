@@ -11,9 +11,10 @@ int main(void){
 	
 	Region continent[WSIZE][WSIZE];
 	srand(time(NULL));
-	GenStart(WSIZE, WSIZE, continent);
-	//Generate(WSIZE, WSIZE, continent);
+	//GenStart(WSIZE, WSIZE, continent);
+	Generate(WSIZE, WSIZE, continent);
 	PrintWorld(WSIZE, WSIZE, continent);
+	
 	return 0;
 }
 
@@ -159,7 +160,7 @@ void PrintWorld(int y_size, int x_size, Region continent[y_size][x_size]){
 	init_color(3, 895, 1000, 1000);
 	init_pair(3, 3, 3);
 
-	init_color(4, 978, 886, 714);
+	init_color(4, 895, 886, 714);
 	init_pair(4, 4, 4);
 
 	init_color(5, 1000, 738, 60);
@@ -168,27 +169,30 @@ void PrintWorld(int y_size, int x_size, Region continent[y_size][x_size]){
 	for(int y = 0; y < y_size; y++){
 		for(int x = 0; x < x_size; x++){
 			
-			if(strcmp(continent[y][x].biom, "me")){
+			if(strcmp(continent[y][x].biom, "me") == 0){
 				attron(COLOR_PAIR(1));
 				mvaddch(y, x, '.');
 				attroff(COLOR_PAIR(1));
-			} else if(strcmp(continent[y][x].biom, "st")){
+			} else if(strcmp(continent[y][x].biom, "st") == 0){
+
 				attron(COLOR_PAIR(4));
 				mvaddch(y, x, '.');
 				attroff(COLOR_PAIR(4));
-			}else if(strcmp(continent[y][x].biom, "sn")){
+			}else if(strcmp(continent[y][x].biom, "sn") == 0){
+
 				attron(COLOR_PAIR(3));
 				mvaddch(y, x, '.');
 				attroff(COLOR_PAIR(3));
-			} else if(strcmp(continent[y][x].biom, "de")){
+			} else if(strcmp(continent[y][x].biom, "de") == 0){
 				attron(COLOR_PAIR(5));
 				mvaddch(y, x, '.');
 				attroff(COLOR_PAIR(5));
-			}else if(strcmp(continent[y][x].biom, "wo")){
+			}else if(strcmp(continent[y][x].biom, "wo") == 0){
 				attron(COLOR_PAIR(2));
 				mvaddch(y, x, '.');
 				attroff(COLOR_PAIR(2));
 			}
+			refresh();
 		}
 	}
 	refresh();
