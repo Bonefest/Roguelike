@@ -41,11 +41,15 @@ void GenRegion(int y_size, int x_size, Region continent[y_size][x_size], int y_p
 	int d_chanses;
 	int w_chanses = 0;
 	//Desert
-	d_chanses = 100-mid_dist*3;
+	d_chanses = WSIZE-mid_dist*(WSIZE/10);
 	//Snows
-	sn_chanses = mid_dist/3*2;
+	sn_chanses = 0;
+
+
 	//Steppe
-	st_chanses = 80-mid_dist*2;
+	st_chanses = (WSIZE * 0.8)-mid_dist*(WSIZE/50);
+	//Meadow
+	m_chanses = 30;
 	for(int j = y_pos-1; j <= y_pos+1; j++){// Исходя из окружающих биомов
 		if(j == -1 || j == y_size) continue;
 		for(int i = x_pos-1; i <= x_pos+1; i++)
@@ -54,19 +58,23 @@ void GenRegion(int y_size, int x_size, Region continent[y_size][x_size], int y_p
 			if(!strcmp(continent[j][i].biom, "me")){
 				m_chanses += 5;
 				w_chanses += 10;
+				st_chanses += 10;
 			} else if(!strcmp(continent[j][i].biom, "st")){
-				st_chanses += 5;
-				w_chanses += 10;
+				st_chanses += 15;
+				w_chanses += 15;
 			}else if(!strcmp(continent[j][i].biom, "sn")){
 				sn_chanses += 10;
 				d_chanses -= 5;
 				w_chanses -= 10;
+				m_chanses -= 15;
 			} else if(!strcmp(continent[j][i].biom, "de")){
 				d_chanses += 10;
 				sn_chanses -= 5;
 				w_chanses -= 10;
 			}else if(!strcmp(continent[j][i].biom, "wo")){
-				w_chanses += 15;
+				w_chanses += 10;
+				m_chanses += 10;
+				st_chanses += 10;
 			}
 		}
 	}
@@ -87,6 +95,11 @@ void GenRegion(int y_size, int x_size, Region continent[y_size][x_size], int y_p
 	}
 
 	while((m_chanses+w_chanses+sn_chanses+st_chanses+d_chanses) < 100) m_chanses++;
+
+	if(mid_dist > WSIZE/2.1){
+		sn_chanses += m_chanses;
+		m_chanses = 0;
+	}
 
 	//Выбор биома
 	int r = 1 + (rand() % 100);
