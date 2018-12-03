@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity>
+	<view model="S" r="800" g="800" b="800"></view>
+	<attributes>
+		<strength>20</strength>
+		<constitution>20</constitution>
+		<stabillity>10</stabillity>
+		<intellect>15</intellect>
+		<willpower>0</willpower>
+		<wisdom>0</wisdom>
+		<charisma>0</charisma>
+		<dexterity>5</dexterity>
+		<speed>2</speed>
+		<flexibility>1</flexibility>
+	</attributes>
+
+	<weight>30</weight>
+	<height>150</height>
+</entity>

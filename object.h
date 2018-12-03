@@ -18,31 +18,45 @@ struct View {
 	struct ColorRGB color;
 };
 
-struct Race {
-	char* raceName;
-	//Skill* skills;
-	//Abillity* abillities;
+
+//Структура,которая описывает все аттрибуты существа
+struct Attributes {
+	short strength;				//(str)Сила
+	short constitution;			//(con)Телосложение
+	short stabillity;			//(stb)Устойчивость
+
+	short intellect;			//(int)Интеллект
+	short willpower;			//(wlp)Сила воли
+	short wisdom;				//(wdm)Мудрость
+	short confidence;			//(cnf)Уверенность
+	short charisma;				//(chr)Харизма
+
+	short dexterity;			//(dex)Ловкость
+	short speed;				//(spd)Скорость
+	short flexibility;			//(flx)Гибкость
 };
 
 //Структура,которая представляет класс живого объекта.Как и раса,каждый класс имеет свои навыки(ск) и умения(аб).
 //К примеру класс лучник имеет навык стрельбы двумя стрелами.
+//На возможность выбора класса влияет интеллект (животные не могут брать класс)
 struct Class {
-	char* className;
+	char className[NAME_SIZE];
 	//Skill* skills;
 	//Abillity* abillities;
 };
 
 struct Entity {
-	//struct Race* race;
-
+	
 	char entityName[NAME_SIZE];
+
+	struct View view;
+	struct Attributes attributes;
 
 	long long minHealth;
 	long long maxHealth;
 
-	int weight;
-	int height;
-	int speed;
+	short weight;
+	short height;
 
 	int level;
 	long long experience;
